@@ -17,3 +17,7 @@ If you're in Eastern Daylight Time and you're looking at a model that was initia
 ## Technology
 
 This is a simple Ruby-based Sinatra app.
+
+## Demo
+
+At the time of this writing, there was a demo running [on Heroku](https://forecast-model-time-calculator.herokuapp.com).
