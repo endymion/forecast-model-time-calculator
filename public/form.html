@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Forecast Model Time Calculator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
+    <link href="/styles.css" rel="stylesheet">
+  </head>
+
+  <body style="">
+    <div class="container">
+      <form id="form" class="form" action="/calculate" method="get" _lpchecked="1">
+        <h2 class="form-heading">Forecast Model Time Calculator</h2>
+        <div>
+          This calculator finds the local time of frames in tropical cylone
+          forecast models.
+          See <a href="https://github.com/endymion/forecast-model-time-calculator">here</a>
+          for an explanation.
+        </div>
+        <br/>
+        <label for="model_initialization"><b>Initialization</b></label>
+        <input id="model_initialization" type="text" class="input-block-level"
+          placeholder="model initialization zulu time" autofocus="">
+        <label for="offset"><b>Offset</b></label>
+        <input id="offset" type="text" class="input-block-level"
+          placeholder="offset in hours" autofocus="">
+        <label for="time_zone"><b>Time zone</b></label>
+        <select id="time_zone">
+          <option value="4">EDT</option>
+          <option value="5">CDT</option>
+        </select>
+        <label for="local_time"><b>Local time</b></label>
+          <div id="local_time">Enter the model initialization time in UTC and the hour offset, above.</div>
+        <br/>
+        <button class="btn btn-large btn-primary" type="submit">calculate local time</button>
+      </form>
+    </div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script>
+      $('#form').submit(function(e){
+        var $model_initialization = $('#model_initialization').val();
+        var $offset = $('#offset').val();
+        var $time_zone = $('#time_zone').val();
+        console.log("time zone: " + $time_zone);
+        $('#local_time').load('calculate',
+          {
+            model_initialization: $model_initialization,
+            offset: $offset,
+            time_zone: $time_zone
+          }, function() {
+        });
+        return false;
+      })
+    </script>
+
+</body></html>
