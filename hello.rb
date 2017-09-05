@@ -1,4 +1,5 @@
 require 'sinatra'
+require 'tzinfo'
 
 get '/' do
   File.read('public/form.html')
@@ -15,11 +16,9 @@ post '/calculate' do
     return 'enter time offset in hours'
   end
 
-  puts "Time zone: #{params[:time_zone]}"
-
-  (
+  tz = TZInfo::Timezone.get(params[:time_zone])
+  tz.utc_to_local(
     Time.parse("#{params[:model_initialization]}:00 GMT") +
-    params[:offset].to_i*60*60 -
-    params[:time_zone].to_i*60*60
-  ).to_s
+    params[:offset].to_i*60*60
+  ).strftime('%A, %B %e at %I:%M %p')
 end
